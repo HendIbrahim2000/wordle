@@ -1,14 +1,8 @@
 import React from "react";
 
- const Row = () => {
+ const Row = props => {
     return (
-        <div className="row">
-            <div>w</div>
-            <div>o</div>
-            <div>r</div>
-            <div>d</div>
-            <div>s</div>
-        </div>
+            <div className="row">{props.text}</div>
     )
  }
 
