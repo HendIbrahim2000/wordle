@@ -6,16 +6,15 @@ import Grid from "./Grid";
  const Wordle = ({solution}) => {
     const {letters, addLetter} = useWordle(solution)
     useEffect(()=>{
-        document.addEventListener("keydown", addLetter);
           return ()=> {
-            document.removeEventListener("keydown", addLetter);
+            document.addEventListener("keydown", addLetter);
           }
         },[])
     return (
         <div>
-            <p>Solution : {solution}</p>
+            
             <p>Guess the word : {letters && letters}</p>
-            <Grid />
+            <Grid solution={solution} />
             
         </div>
     )

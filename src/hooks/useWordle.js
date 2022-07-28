@@ -1,29 +1,23 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 
 
 export function useWordle (solution) {
     let [letters, setLetters] = useState([])
     const[guesses, setguesses] = useState([...Array(5)])
-    // const sol = solution.split('')
-    
+    const[validation, setValidation] = useState([...Array(5)])
 
     const addLetter = (event) => {
-    // console.log(sol)
         if (/^[A-Za-z]$/.test(event.key)){
           setLetters((prev)=>{
             if(prev.length < 5){
               prev = prev.join('') + event.key
               letters = (prev).split('')
-            //   console.log(letters)
               return letters
             }
             
             return prev
           })
-        //   setguesses(guesses.concat(event.key))
-        //   console.log(guesses)
         setguesses(()=> {
-            // const restGuess =  guesses.slice(letters.length,5)
             const typing = guesses.splice(0, letters.length, ...letters) 
             
           return [...typing, ...Array(5-letters.length)]
@@ -39,26 +33,47 @@ export function useWordle (solution) {
                 return letters
             })
             setguesses(()=> { 
-                // console.log(letters)
               return [...letters, ...Array(5-letters.length)]
 
             })
             return  letters
         }
-        if(event.key === "Enter" ){
-            if(letters.length===5){
-
-            } else {
-                console.log('Word should be 5 words')
+        
+            if(event.key === "Enter" ){
+                
+                if(letters.length===5){
+                    for(const letter in letters) {
+                        for(const key in solution){
+                            if(letters[letter]===solution[key]){
+                                if(letter === key) {
+                                    setValidation(validation.concat(validation[letter]='green'))
+                                    
+                                } else {   
+                                    setValidation(validation.concat(validation[letter]='yellow'))
+                                }   
+                            } else{
+                                if(validation[letter]!=='yellow' && validation[letter]!=='green') {
+                                    setValidation(validation.concat(validation[letter]='gray'))
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                } else {
+                    console.log('Word should be 5 words')
+                    
+                }
+                
             }
-        }
- 
-        // console.log(guesses.length)
-        // console.log(guesses)
+
         
       }
-      
+    
     
 
- return {letters,guesses, addLetter}
+ return {letters,guesses,validation, addLetter }
 }

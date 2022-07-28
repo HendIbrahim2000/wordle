@@ -28,7 +28,59 @@ code {
   width: 65px;
   height: 65px;
   margin: 5px;
-  border: 1px solid #a3a3a3;
   font-size: 38px;
   font-weight: bold;
+}
+.light-gray {
+  background: #ededed;
+  color: #343434;
+}
+.gray {
+  --background: #cfcfcf;
+  color: #343434;
+  animation: flip .5s ease forwards;
+}
+.yellow {
+  --background: #ecdb3d;
+  color: #fff;
+  animation: flip .5s ease forwards;
+}
+.green {
+  --background: #6ca776;
+  color: #fff;
+  animation: flip .5s ease forwards;
+}
+
+.row:nth-child(2) {
+  animation-delay: .2s;
+}
+.row:nth-child(3) {
+  animation-delay: .4s;
+}
+.row:nth-child(4) {
+  animation-delay: .6s;
+}
+.row:nth-child(5) {
+  animation-delay: .8s;
+}
+
+
+@keyframes flip {
+  0% {
+    transform: rotatex(0);
+    background: #ededed;
+  }
+  45% {
+    transform: rotatex(90deg);
+    background: #ededed;
+  }
+  55% {
+    transform: rotatex(90deg);
+    background: var(--background);
+  }
+  100% {
+    transform: rotatex(0);
+    background: var(--background);
+  }
+  
 }

@@ -1,22 +1,24 @@
-import React, {useState ,useEffect} from "react";
+import React, {useEffect} from "react";
 import {useWordle} from '../hooks/useWordle';
 
 import Row from "./Row";
 
 
  const Grid = ({solution}) => {
-    const {guesses, addLetter} = useWordle(solution)
+    const {guesses,validation, addLetter} = useWordle(solution)
     
     useEffect(()=>{
-        document.addEventListener("keydown", addLetter);
         return ()=> {
-        document.removeEventListener("keydown", addLetter);
+            document.addEventListener("keydown", addLetter);
         }
         },[])
     return (
         <div style={{display:'flex'}}>
-            
-            {guesses.map((item, index) => <Row text={item} key={index} />)}
+            {guesses.map((item, index) =>{
+                
+                const validate = validation[index]
+                return <Row text={item} key={index} color={validate} />
+            } )}
             {/* <Row text='' />
             <Row text='' />
             <Row text='' />
