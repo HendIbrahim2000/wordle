@@ -5,6 +5,7 @@ export function useWordle (solution) {
     let [letters, setLetters] = useState([])
     const[guesses, setguesses] = useState([...Array(5)])
     const[validation, setValidation] = useState([...Array(5)])
+    const[isCorrect, setisCorrect] = useState(null)
 
     const addLetter = (event) => {
         if (/^[A-Za-z]$/.test(event.key)){
@@ -62,6 +63,16 @@ export function useWordle (solution) {
                         
                         
                     }
+                    console.log(validation)
+                    function checkAge(age) {
+                        return age ==='green';
+                      }
+                    if(validation.every(checkAge)) {
+                        setisCorrect(true)
+                        
+                    } else {
+                        setisCorrect(false)
+                    }
                     
                 } else {
                     console.log('Word should be 5 words')
@@ -75,5 +86,5 @@ export function useWordle (solution) {
     
     
 
- return {letters,guesses,validation, addLetter }
+ return {letters,guesses,validation, addLetter, isCorrect }
 }
